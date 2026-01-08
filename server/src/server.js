@@ -20,21 +20,22 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Import API routes
+import categoryRoutes from './routes/categories.js';
+import transactionRoutes from './routes/transactions.js';
+import goalRoutes from './routes/goals.js';
+import analyticsRoutes from './routes/analytics.js';
+
 // Basic health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Finance Tracker API is running' });
 });
 
-// API Routes will be imported here later
-// import transactionRoutes from './routes/transactions.js';
-// import categoryRoutes from './routes/categories.js';
-// import goalRoutes from './routes/goals.js';
-// import analyticsRoutes from './routes/analytics.js';
-
-// app.use('/api/transactions', transactionRoutes);
-// app.use('/api/categories', categoryRoutes);
-// app.use('/api/goals', goalRoutes);
-// app.use('/api/analytics', analyticsRoutes);
+// Mount API routes
+app.use('/api/categories', categoryRoutes);
+app.use('/api/transactions', transactionRoutes);
+app.use('/api/goals', goalRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -42,6 +43,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
     error: {
       message: err.message || 'Internal server error',
+      ...(err.details && { details: err.details }),
     },
   });
 });
