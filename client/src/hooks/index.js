@@ -2,6 +2,7 @@
 export {
   useCategories,
   useCategory,
+  useUpdateCategory,
   filterCategoriesByType,
   CATEGORIES_QUERY_KEY,
 } from './useCategories.js';

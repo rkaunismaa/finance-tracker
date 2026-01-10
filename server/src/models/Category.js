@@ -27,6 +27,31 @@ class Category {
 
     return category;
   }
+
+  static update(id, data) {
+    // First check if category exists
+    this.findById(id);
+
+    const updates = [];
+    const params = [];
+
+    if (data.monthly_budget !== undefined) {
+      updates.push('monthly_budget = ?');
+      params.push(data.monthly_budget);
+    }
+
+    if (updates.length === 0) {
+      return this.findById(id);
+    }
+
+    params.push(id);
+    const stmt = db.prepare(
+      `UPDATE categories SET ${updates.join(', ')} WHERE id = ?`
+    );
+    stmt.run(...params);
+
+    return this.findById(id);
+  }
 }
 
 export default Category;

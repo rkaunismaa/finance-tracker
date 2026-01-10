@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { getCategories, getCategory } from '../services/categoriesService.js';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { getCategories, getCategory, updateCategory } from '../services/categoriesService.js';
 
 export const CATEGORIES_QUERY_KEY = ['categories'];
 
@@ -42,4 +42,22 @@ export function useCategory(id) {
 export function filterCategoriesByType(categories, type) {
   if (!categories) return [];
   return categories.filter((cat) => cat.type === type);
+}
+
+/**
+ * Hook to update category (budget)
+ * @returns {Object} React Query mutation result
+ */
+export function useUpdateCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, data }) => {
+      const response = await updateCategory(id, data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: CATEGORIES_QUERY_KEY });
+    },
+  });
 }

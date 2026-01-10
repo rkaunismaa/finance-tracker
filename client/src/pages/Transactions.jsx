@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Plus } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Plus, Download } from 'lucide-react';
 import { Header } from '../components/layout/index.js';
 import { Button } from '../components/common/index.js';
 import {
@@ -15,6 +15,7 @@ import {
   useDeleteTransaction,
 } from '../hooks/useTransactions.js';
 import { useCategories } from '../hooks/useCategories.js';
+import { exportTransactionsCSV } from '../utils/export.js';
 
 function Transactions() {
   const [filters, setFilters] = useState({
@@ -89,16 +90,35 @@ function Transactions() {
     updateMutation.isPending ||
     deleteMutation.isPending;
 
+  // Listen for export event from Settings page
+  useEffect(() => {
+    const handler = () => {
+      exportTransactionsCSV(transactions, categories);
+    };
+    window.addEventListener('export-csv', handler);
+    return () => window.removeEventListener('export-csv', handler);
+  }, [transactions, categories]);
+
+  const handleExport = () => {
+    exportTransactionsCSV(transactions, categories);
+  };
+
   return (
     <div>
       <Header
         title="Transactions"
         subtitle="Track your income and expenses"
         actions={
-          <Button onClick={handleOpenCreate}>
-            <Plus className="w-4 h-4 mr-2" />
-            Add Transaction
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="w-4 h-4 mr-2" />
+              Export CSV
+            </Button>
+            <Button onClick={handleOpenCreate}>
+              <Plus className="w-4 h-4 mr-2" />
+              Add Transaction
+            </Button>
+          </div>
         }
       />
 

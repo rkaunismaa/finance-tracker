@@ -9,6 +9,7 @@ export function createTables() {
       type TEXT NOT NULL CHECK(type IN ('income', 'expense')),
       color TEXT,
       icon TEXT,
+      monthly_budget REAL DEFAULT NULL CHECK(monthly_budget IS NULL OR monthly_budget > 0),
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);

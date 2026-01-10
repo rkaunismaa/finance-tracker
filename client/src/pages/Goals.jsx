@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Target } from 'lucide-react';
+import { Plus, Target, Download } from 'lucide-react';
 import { Header } from '../components/layout/index.js';
 import { Button, EmptyState, LoadingSpinner, Select } from '../components/common/index.js';
 import { GoalCard, GoalForm, UpdateProgressModal } from '../components/goals/index.js';
@@ -11,6 +11,7 @@ import {
   useDeleteGoal,
 } from '../hooks/useGoals.js';
 import { GOAL_STATUS } from '../utils/constants.js';
+import { exportGoalsCSV } from '../utils/export.js';
 
 const statusFilters = [
   { value: '', label: 'All Goals' },
@@ -110,6 +111,10 @@ function Goals() {
     updateMutation.isPending ||
     deleteMutation.isPending;
 
+  const handleExport = () => {
+    exportGoalsCSV(goals);
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -128,10 +133,16 @@ function Goals() {
         title="Savings Goals"
         subtitle="Track progress toward your financial goals"
         actions={
-          <Button onClick={handleOpenCreate}>
-            <Plus className="w-4 h-4 mr-2" />
-            New Goal
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="w-4 h-4 mr-2" />
+              Export CSV
+            </Button>
+            <Button onClick={handleOpenCreate}>
+              <Plus className="w-4 h-4 mr-2" />
+              New Goal
+            </Button>
+          </div>
         }
       />
 

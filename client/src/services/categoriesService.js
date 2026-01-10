@@ -17,3 +17,13 @@ export async function getCategories() {
 export async function getCategory(id) {
   return api.get(`${API_ENDPOINTS.CATEGORIES}/${id}`);
 }
+
+/**
+ * Update category
+ * @param {number} id - Category ID
+ * @param {Object} data - Update data (monthly_budget)
+ * @returns {Promise<Object>} Response with { data: Category }
+ */
+export async function updateCategory(id, data) {
+  return api.put(`${API_ENDPOINTS.CATEGORIES}/${id}`, data);
+}
