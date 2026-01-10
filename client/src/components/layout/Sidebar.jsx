@@ -3,6 +3,7 @@ import {
   LayoutDashboard,
   ArrowLeftRight,
   Target,
+  PiggyBank,
   Settings,
   Wallet,
 } from 'lucide-react';
@@ -11,6 +12,7 @@ const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'Transactions', href: '/transactions', icon: ArrowLeftRight },
   { name: 'Goals', href: '/goals', icon: Target },
+  { name: 'Budget', href: '/budget', icon: PiggyBank },
 ];
 
 function Sidebar({ isOpen = false, onClose }) {
