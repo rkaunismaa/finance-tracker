@@ -142,17 +142,77 @@ client/src/
 
 ---
 
+## Phase 4: Polish & Features ✅
+
+**Commit:** `05e159c`
+
+### Objectives
+- Implement user preferences and settings management
+- Add dark mode with persistent theme switching
+- Build data export functionality
+- Add budget tracking to categories
+- Improve mobile responsiveness
+
+### Deliverables
+
+**User Preferences System:**
+- Zustand store with localStorage persistence
+- Theme (light/dark)
+- Currency selection (9 currencies: USD, EUR, GBP, JPY, CAD, AUD, CHF, CNY, INR)
+- Date format options (4 formats)
+- Number format localization (5 locales)
+- Transactions per page preference
+- Dashboard layout preferences
+- Reset to defaults functionality
+
+**Settings Page:**
+- Appearance section with theme toggle
+- Regional settings (currency, date, number format)
+- Display preferences (pagination)
+- Data management (CSV export trigger)
+- Reset button with confirmation
+
+**Dark Mode:**
+- Class-based dark mode using Tailwind
+- Automatic theme application on mount
+- Dark mode styles for all components:
+  - Layout (background, transitions)
+  - Sidebar (navigation, borders, hover states)
+  - Card (background, borders, text colors)
+  - Header, buttons, inputs, modals
+- Smooth color transitions
+
+**Data Export:**
+- CSV export utility for transactions and goals
+- Export buttons on Transactions and Goals pages
+- Proper CSV formatting with quote escaping
+- Date-stamped filenames
+- Custom event listener for Settings page trigger
+
+**Budget Tracking (Backend):**
+- Added `monthly_budget` column to categories table
+- Category update endpoint: `PUT /api/categories/:id`
+- Budget validation (positive numbers or null)
+- Category model update method
+- Ready for frontend budget UI implementation
+
+**Mobile Responsiveness:**
+- Hamburger menu button (visible on mobile)
+- Slide-in sidebar with backdrop overlay
+- Mobile-first responsive padding (px-4 sm:px-6 lg:px-8)
+- Touch-friendly click targets
+- Sidebar auto-close on navigation
+- Responsive header spacing (mt-16 lg:mt-0)
+
+---
+
 ## Future Enhancements (Not Implemented)
 
-### Phase 4: Polish & Features
-- [ ] Settings page implementation (currency, date format preferences)
-- [ ] Dark mode support
-- [ ] Data export (CSV, PDF)
-- [ ] Recurring transactions
-- [ ] Budget limits per category
-- [ ] Mobile-responsive improvements
-
 ### Phase 5: Advanced Features
+- [ ] PDF export with custom formatting
+- [ ] Recurring transactions
+- [ ] Budget UI with progress bars and warnings
+- [ ] Dashboard layout customization
 - [ ] Bill reminders and notifications
 - [ ] Multi-currency support
 - [ ] Data import from bank statements
