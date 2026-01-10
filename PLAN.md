@@ -206,13 +206,67 @@ client/src/
 
 ---
 
+## Phase 5: Advanced Features ✅
+
+**Commit:** `d1b5206`
+
+### Objectives
+- Implement comprehensive budget management system
+- Add dashboard customization capabilities
+- Enhance user control over financial tracking
+
+### Deliverables
+
+**Budget Management System:**
+- New `/budget` route with full budget management interface
+- Category-level monthly budget setting and tracking
+- Visual progress bars showing budget utilization percentage
+- Color-coded status indicators:
+  - Green: Good (< 80% used)
+  - Yellow: Warning (80-99% used)
+  - Red: Over budget (≥ 100% used)
+- Alert badges for budget warnings
+- Total budget summary dashboard with 3 cards:
+  - Total Monthly Budget
+  - Total Spent (current month)
+  - Remaining Budget
+- Real-time spending data integration from analytics API
+- Set, edit, and remove budgets per category
+- Budget modal with validation
+
+**Dashboard Customization:**
+- "Customize" button on dashboard header
+- Toggle visibility for 5 dashboard sections:
+  - Summary Cards (income, expenses, balance)
+  - Trends Chart (monthly line chart)
+  - Category Breakdown (pie chart)
+  - Recent Transactions (latest 5)
+  - Goals Overview (active goals)
+- Preferences persist in localStorage via Zustand
+- Conditional rendering based on user selections
+- Smooth layout adjustments when sections are hidden
+
+**UI Components:**
+- `Budget.jsx` - Full budget management page with progress tracking
+- `BudgetModal.jsx` - Modal for setting/editing category budgets
+- `DashboardCustomizeModal.jsx` - Section toggle interface
+- Budget page added to sidebar navigation with PiggyBank icon
+
+**User Experience:**
+- Responsive budget cards with category colors and icons
+- Progress bars with percentage and remaining amount display
+- Warning badges when approaching budget limits
+- Over-budget alerts with red styling
+- Dark mode support for all new components
+- Mobile-responsive layout
+
+---
+
 ## Future Enhancements (Not Implemented)
 
-### Phase 5: Advanced Features
+### Phase 6: Advanced Features
 - [ ] PDF export with custom formatting
 - [ ] Recurring transactions
-- [ ] Budget UI with progress bars and warnings
-- [ ] Dashboard layout customization
 - [ ] Bill reminders and notifications
 - [ ] Multi-currency support
 - [ ] Data import from bank statements
